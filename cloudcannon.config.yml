@@ -115,14 +115,6 @@ collections_config:
           resize_style: contain
           width: 1920
           height: 1280
-collection_groups:
-  - heading: Content
-    collections:
-      - pages
-      - blog
-  - heading: Data
-    collections:
-      - data
 _inputs:
   pageSections:
     comment: The main sections of the page.
