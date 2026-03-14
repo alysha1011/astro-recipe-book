@@ -1,0 +1,18 @@
+label: Recipe Carousel
+icon: view_carousel
+description: Carousel of recipe cards.
+value:
+  _component: page-sections/layouts/recipe-carousel
+  heading: Recipes
+  slides: []
+  colorScheme: inherit
+  backgroundColor: base
+preview:
+  text:
+    - Recipe Carousel
+  icon: view_carousel
+picker_preview:
+  text: Recipe Carousel
+  subtext: Carousel of recipe cards.
+_inputs_from_glob:
+  - /src/components/page-sections/layouts/recipe-carousel/recipe-carousel.cloudcannon.inputs.yml

@@ -1,0 +1,35 @@
+---
+import Heading from "@core-elements/heading/Heading.astro";
+import Card from "@wrappers/card/Card.astro";
+import { getEntry } from "astro:content";
+
+const {
+  recipe,
+  cardStyle,
+  class: className,
+  useDefaultEditableBinding: _useDefaultEditableBinding = false,
+  _component,
+  ...htmlAttributes
+} = Astro.props;
+
+const page = await getEntry("recipes", recipe);
+---
+
+<Card
+  class:list={[
+    "recipe-carousel-item",
+    cardStyle && `recipe-carousel-item--${cardStyle}`,
+    className,
+  ]}
+  style={cardStyle == "small" ? "sticky" : "polaroid"}
+  backgroundImage={cardStyle == "large" ? recipe.image.source : undefined}
+  paddingHorizontal="xs"
+  paddingVertical="none"
+>
+  <Heading
+    level="h2"
+    size="lg"
+  >
+    {recipe.Title}
+  </Heading>
+</Card>

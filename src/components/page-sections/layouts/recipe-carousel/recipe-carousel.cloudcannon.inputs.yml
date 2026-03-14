@@ -1,0 +1,66 @@
+heading:
+  type: text
+  comment: Main heading for the slider section.
+slides:
+  type: array
+  label: Slides
+  comment: Recipes rendered inside the carousel.
+  options:
+    structures:
+      - label: Recipe slide
+        icon: view_carousel
+        value:
+          _component: page-sections/layouts/recipe-carousel/recipe-carousel-item
+          recipes: []
+        _inputs:
+          recipes:
+            type: array
+            label: Recipes
+            comment: Select recipes to display in the carousel slide.
+            options:
+              structures:
+                - label: Recipe
+                  icon: article
+                  value:
+                    recipe: ""
+                    cardStyle: small
+                  _inputs:
+                    recipe:
+                      type: select
+                      options:
+                        values: collections.recipes
+                    cardStyle:
+                      type: select
+                      comment: Style of the recipe card.
+                      options:
+                        values:
+                          - id: small
+                            name: Small
+                          - id: large
+                            name: Large
+colorScheme:
+  type: select
+  comment: Color scheme theme applied to the section wrapper.
+  options:
+    values:
+      - id: inherit
+        name: Inherit
+      - id: light
+        name: Light
+      - id: dark
+        name: Dark
+backgroundColor:
+  type: select
+  comment: Background color for the section.
+  options:
+    values:
+      - id: none
+        name: None
+      - id: base
+        name: Base
+      - id: surface
+        name: Surface
+      - id: accent
+        name: Accent
+      - id: highlight
+        name: Highlight

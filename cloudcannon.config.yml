@@ -23,6 +23,27 @@ collections_config:
       title:
         type: text
         comment: Controls the metadata title for the page.
+  recipes:
+    path: src/content/recipes
+    glob:
+      - "**/*.md"
+    url: /recipes/[full_slug]/
+    icon: restaurant
+    _enabled_editors:
+      - content
+      - visual
+    add_options:
+      - name: Add New Recipe
+        schema: default
+        icon: restaurant
+    schemas:
+      default:
+        name: New Recipe
+        path: .cloudcannon/schemas/recipe.md
+        remove_extra_inputs: false
+    create:
+      path: "[relative_base_path]/{filename|slugify|lowercase}.md"
+    new_preview_url: /recipes/biscoff-gelato/
   blog:
     path: src/content/blog
     glob:

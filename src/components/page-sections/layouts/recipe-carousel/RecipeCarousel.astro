@@ -1,0 +1,77 @@
+---
+import CustomSection from "@builders/custom-section/CustomSection.astro";
+import Heading from "@core-elements/heading/Heading.astro";
+import RecipeCarouselItem from "@layoutComponents/recipe-carousel/RecipeCarouselItem.astro";
+import Carousel from "@wrappers/carousel/Carousel.astro";
+import CarouselSlide from "@wrappers/carousel/CarouselSlide.astro";
+
+type SlideProps = Record<string, unknown>;
+type CardProps = Record<string, unknown>;
+
+const {
+  heading,
+  colorScheme = "inherit",
+  backgroundColor,
+  paddingVertical = "4xl",
+  class: className,
+  slides = [],
+  useDefaultEditableBinding = false,
+  _component,
+  ...htmlAttributes
+} = Astro.props;
+---
+
+<CustomSection
+  class:list={["recipe-carousel", className]}
+  maxContentWidth="xl"
+  paddingHorizontal="lg"
+  paddingVertical={paddingVertical}
+  colorScheme={colorScheme}
+  backgroundColor={backgroundColor}
+  useDefaultEditableBinding={useDefaultEditableBinding}
+  {...htmlAttributes}
+>
+  <Heading
+    level="h1"
+    size="2xl"
+    alignX="center"
+    data-prop="heading"
+  >
+    {heading}
+  </Heading>
+  <Carousel
+    label="Recipe carousel"
+    slideWidthPercent={100}
+    minSlideWidth={0}
+    autoPlay={false}
+    autoScroll={false}
+    data-children-prop="slides"
+  >
+    {
+      slides.map((slide: SlideProps, index: number) => (
+        <CarouselSlide
+          {...htmlAttributes}
+          data-editable="array-item"
+          data-id="building-blocks/wrappers/carousel/carousel-slide"
+        >
+          <div
+            class="recipe-carousel-slides"
+            aria-label={`Slide ${index + 1} of ${slides.length}`}
+            data-editable="array-item"
+            data-id="page-sections/layouts/recipe-carousel/recipe-carousel-item"
+            data-prop=""
+          >
+            {slide.map((slide: CardProps, index: number) => (
+              <RecipeCarouselItem
+                aria-label={`Slide ${index + 1} of ${slides.length}`}
+                data-editable="array-item"
+                data-id="page-sections/layouts/recipe-carousel/recipe-carousel-item"
+                {...slide}
+              />
+            ))}
+          </div>
+        </CarouselSlide>
+      ))
+    }
+  </Carousel>
+</CustomSection>

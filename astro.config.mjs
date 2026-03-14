@@ -98,6 +98,7 @@ export default defineConfig({
         "@page-sections": path.resolve(__dirname, "src/components/page-sections"),
         "@features": path.resolve(__dirname, "src/components/page-sections/features"),
         "@builders": path.resolve(__dirname, "src/components/page-sections/builders"),
+        "@layoutComponents": path.resolve(__dirname, "src/components/page-sections/layouts"),
         "@data": path.resolve(__dirname, "src/data"),
         "@content": path.resolve(__dirname, "src/content"),
         "@assets": path.resolve(__dirname, "src/assets"),

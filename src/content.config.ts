@@ -100,9 +100,26 @@ const blogCollection = defineCollection({
   schema: blogPostSchema,
 });
 
+const recipeSchema = z.object({
+  title: z.string(),
+  method: z.array(z.any()).optional(),
+  image: z.object({ source: z.string(), alt: z.string() }).optional(),
+  extraNote: z.string().optional(),
+  tags: z.array(z.string()).default([]),
+  meal: z.enum(["Breakfast", "Lunch", "Dinner", "Snack", "Dessert"]).optional(),
+  cookTime: z.number().optional(),
+  prepTime: z.number().optional(),
+});
+
+const recipeCollection = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/recipes" }),
+  schema: recipeSchema,
+});
+
 export const collections = {
   pages: pagesCollection,
   "docs-pages": docsPagesCollection,
   "docs-components": docsComponentsCollection,
   blog: blogCollection,
+  recipes: recipeCollection,
 };
