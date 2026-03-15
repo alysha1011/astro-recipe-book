@@ -1,4 +1,8 @@
 ---
+import Button from "@components/building-blocks/core-elements/button/Button.astro";
+import Icon from "@components/building-blocks/core-elements/icon/Icon.astro";
+import Text from "@components/building-blocks/core-elements/text/Text.astro";
+import ButtonGroup from "@components/building-blocks/wrappers/button-group/ButtonGroup.astro";
 import Heading from "@core-elements/heading/Heading.astro";
 import Card from "@wrappers/card/Card.astro";
 import { getEntry } from "astro:content";
@@ -12,7 +16,16 @@ const {
   ...htmlAttributes
 } = Astro.props;
 
-const page = await getEntry("recipes", recipe);
+const slug = recipe.split("/").pop().replace(".md", "");
+
+const page = await getEntry("recipes", slug);
+
+const totalTime = (page?.data.prepTime || 0) + (page?.data.cookTime || 0);
+const hours = Math.floor(totalTime / 60);
+const minutes = totalTime % 60;
+
+const parsedTime =
+  totalTime > 0 ? `${hours ? `${hours}h ` : ""}${minutes ? `${minutes}m` : ""}`.trim() : "N/A";
 ---
 
 <Card
@@ -22,14 +35,64 @@ const page = await getEntry("recipes", recipe);
     className,
   ]}
   style={cardStyle == "small" ? "sticky" : "polaroid"}
-  backgroundImage={cardStyle == "large" ? recipe.image.source : undefined}
-  paddingHorizontal="xs"
-  paddingVertical="none"
+  backgroundImage={cardStyle == "large" ? page?.data?.image : undefined}
+  backgroundColor={cardStyle == "small" && "highlight"}
+  paddingHorizontal="md"
+  paddingVertical="md"
+  imageLink={`/recipes/${slug}/`}
 >
-  <Heading
-    level="h2"
-    size="lg"
-  >
-    {recipe.Title}
-  </Heading>
+  <a href={`/recipes/${slug}/`}>
+    <Heading
+      style="margin-bottom: var(--spacing-sm);"
+      level="h2"
+      size="lg"
+    >
+      {page?.data.title}
+    </Heading>
+  </a>
+  <ButtonGroup style="margin-top: var(--spacing-sm);">
+    {
+      page?.data.tags &&
+        page.data.tags.map((tag: string) => (
+          <Button
+            href={`/tags/${tag.toLowerCase()}`}
+            variant="secondary"
+            size="sm"
+          >
+            {tag}
+          </Button>
+        ))
+    }
+  </ButtonGroup>
+  {
+    totalTime > 0 && (
+      <div class="time">
+        <Icon
+          name="clock"
+          size="sm"
+          aria-hidden="true"
+          role="presentation"
+        />
+        <Text style="margin-top: 0;">{parsedTime}</Text>
+      </div>
+    )
+  }
 </Card>
+
+<style>
+  @layer page-sections {
+    .time {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-xs);
+      padding: var(--spacing-sm) 0;
+    }
+    .recipe-carousel-item {
+      margin: var(--spacing-xl) var(--spacing-md);
+      grid-column: span 2;
+    }
+    .recipe-carousel-item--large {
+      grid-row: span 2;
+    }
+  }
+</style>

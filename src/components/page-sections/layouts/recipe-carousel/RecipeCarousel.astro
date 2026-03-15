@@ -5,9 +5,6 @@ import RecipeCarouselItem from "@layoutComponents/recipe-carousel/RecipeCarousel
 import Carousel from "@wrappers/carousel/Carousel.astro";
 import CarouselSlide from "@wrappers/carousel/CarouselSlide.astro";
 
-type SlideProps = Record<string, unknown>;
-type CardProps = Record<string, unknown>;
-
 const {
   heading,
   colorScheme = "inherit",
@@ -23,7 +20,7 @@ const {
 
 <CustomSection
   class:list={["recipe-carousel", className]}
-  maxContentWidth="xl"
+  maxContentWidth="2xl"
   paddingHorizontal="lg"
   paddingVertical={paddingVertical}
   colorScheme={colorScheme}
@@ -48,7 +45,7 @@ const {
     data-children-prop="slides"
   >
     {
-      slides.map((slide: SlideProps, index: number) => (
+      slides.map((slide: any, index: number) => (
         <CarouselSlide
           {...htmlAttributes}
           data-editable="array-item"
@@ -61,12 +58,11 @@ const {
             data-id="page-sections/layouts/recipe-carousel/recipe-carousel-item"
             data-prop=""
           >
-            {slide.map((slide: CardProps, index: number) => (
+            {slide.recipes.map((card: any, index: number) => (
               <RecipeCarouselItem
-                aria-label={`Slide ${index + 1} of ${slides.length}`}
                 data-editable="array-item"
                 data-id="page-sections/layouts/recipe-carousel/recipe-carousel-item"
-                {...slide}
+                {...card}
               />
             ))}
           </div>
@@ -75,3 +71,16 @@ const {
     }
   </Carousel>
 </CustomSection>
+
+<style>
+  @layer page-sections {
+    .recipe-carousel-slides {
+      display: grid;
+
+      @media screen and (min-width: 640px) {
+        grid-template-columns: repeat(6, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+      }
+    }
+  }
+</style>

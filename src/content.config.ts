@@ -102,6 +102,7 @@ const blogCollection = defineCollection({
 
 const recipeSchema = z.object({
   title: z.string(),
+  description: z.string().optional(),
   method: z.array(z.any()).optional(),
   image: z.object({ source: z.string(), alt: z.string() }).optional(),
   extraNote: z.string().optional(),
