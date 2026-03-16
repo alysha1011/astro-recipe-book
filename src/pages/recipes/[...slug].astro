@@ -12,6 +12,31 @@ import Icon from "@components/building-blocks/core-elements/icon/Icon.astro";
 import Text from "@components/building-blocks/core-elements/text/Text.astro";
 import { getCollection, render, type CollectionEntry } from "astro:content";
 
+// Automatically import all components from building-blocks and page-sections for MDX
+const buildingBlocksImports = import.meta.glob("../../components/building-blocks/**/*.astro", {
+  eager: true,
+});
+
+const pageSectionsImports = import.meta.glob("../../components/page-sections/**/*.astro", {
+  eager: true,
+});
+
+// Merge both import objects
+const componentImports = { ...buildingBlocksImports, ...pageSectionsImports };
+
+// Build components object with PascalCase names from file paths
+const mdxComponents: Record<string, any> = {};
+
+Object.entries(componentImports).forEach(([path, module]) => {
+  const pathParts = path.split("/");
+  const fileName = pathParts[pathParts.length - 1].replace(".astro", "");
+
+  // Component name is already PascalCase from filename
+  const componentName = fileName;
+
+  mdxComponents[componentName] = (module as any).default;
+});
+
 export async function getStaticPaths() {
   const posts = await getCollection("recipes");
 
@@ -24,11 +49,206 @@ export async function getStaticPaths() {
     };
   });
 }
+
+interface Props {
+  post: CollectionEntry<"recipes">;
+}
+
+const { post } = Astro.props;
+
+const ingredients = post.data.method?.flatMap((step) =>
+  step.ingredients.map((ing: any) => ({
+    text: `${ing.quantity}${ing.measurement} ${ing.ingredient}`,
+  }))
+);
+
+const totalTime = (post?.data.prepTime || 0) + (post?.data.cookTime || 0);
+const hours = Math.floor(totalTime / 60);
+const minutes = totalTime % 60;
+
+const parsedTime =
+  totalTime > 0
+    ? `${hours ? `${hours}h ` : ""}${minutes ? `${minutes}m` : ""}`.trim()
+    : "N/A";
 ---
 
-<div>
-  
-</div>
+<Page
+  title={post.data.title}
+  description={post.data.description}
+  image={post.data.image?.source}
+>
+  <CustomSection
+    maxContentWidth="xl"
+    paddingHorizontal="lg"
+    paddingVertical="4xl"
+    colorScheme="inherit"
+    backgroundColor="base"
+    class="post-container"
+    useDefaultEditableBinding={false}
+  >
+    <Split
+      distributionMode="half"
+      minSplitWidth="700"
+      gap="xl"
+      class="ingredients"
+      useDefaultEditableBinding={false}
+    >
+      <Fragment slot="first">
+        <Heading
+          data-prop="title"
+          level="h1"
+          size="2xl"
+          style="margin-bottom: var(--spacing-xs);"
+        >
+          {post.data.title}
+        </Heading>
+
+        {
+          post.data.description && (
+            <SimpleText
+              useDefaultEditableBinding={false}
+              size="lg"
+              style="color: var(--color-text-muted); margin-bottom: 0; margin-top: var(--spacing-xs);"
+            >
+              {post.data.description}
+            </SimpleText>
+          )
+        }
+
+        {
+          totalTime > 0 && (
+            <div class="time">
+              <Icon
+                name="clock"
+                size="sm"
+                aria-hidden="true"
+                role="presentation"
+                useDefaultEditableBinding={false}
+              />
+              <Text style="margin-top: 0;" useDefaultEditableBinding={false}>{parsedTime}</Text>
+            </div>
+          )
+        }
+
+        <Card
+          style="sticky"
+          backgroundColor="highlight"
+          paddingHorizontal="md"
+          paddingVertical="md"
+          useDefaultEditableBinding={false}
+        >
+          <Fragment>
+            <Heading
+              level="h2"
+              size="sm"
+              useDefaultEditableBinding={false}
+            >
+              Ingredients
+            </Heading>
+            <List
+              useDefaultEditableBinding={false}
+              items={ingredients || []}
+              listType="bullet"
+              style="margin-top: var(--spacing-sm);"
+            />
+          </Fragment>
+        </Card>
+
+        <div class="cooking_mode">
+          <input type="checkbox" id="cooking_mode" name="cooking_mode" />
+          <label for="cooking_mode">Enable Cooking Mode</label>
+        </div>
+      </Fragment>
+
+      <Fragment slot="second">
+        {
+          post.data.image && (
+            <Image
+              useDefaultEditableBinding={false}
+              source={post.data.image.source}
+              alt={post.data.title}
+              rounded={true}
+              class="post-image"
+              aspectRatio="square"
+              positionVertical="center"
+            />
+          )
+        }
+      </Fragment>
+    </Split>
+
+    <div class="recipe">
+      <Heading
+        useDefaultEditableBinding={false}
+        level="h2"
+        size="xl"
+        style="margin-top: var(--spacing-2xl);"
+      >
+        Method
+      </Heading>
+      <ol>
+        {
+          post.data.method &&
+            post.data.method.map((step: any, index: number) => (
+              <ListItem key={index} useDefaultEditableBinding={false}>
+                  <Split
+                    distributionMode="half"
+                    minSplitWidth="700"
+                    gap="xl"
+                    useDefaultEditableBinding={false}
+                  >
+                    <Fragment slot="first">
+                      <p>{step.instruction}</p>
+                    </Fragment>
+                    <Fragment slot="second">
+                      { (Array.isArray(step.ingredients) && step.ingredients.length > 0) || step.extraNote ? (
+                        <Card
+                          style="sticky"
+                          backgroundColor="highlight"
+                          paddingHorizontal="sm"
+                          paddingVertical="sm"
+                          useDefaultEditableBinding={false}
+                        >
+                          {Array.isArray(step.ingredients) && step.ingredients.length > 0 && (
+                            <Heading
+                              level="h3"
+                              size="xs"
+                              useDefaultEditableBinding={false}
+                            >
+                              Ingredients
+                            </Heading>
+                            <List
+                              useDefaultEditableBinding={false}
+                              items={step.ingredients.map((ing) => ({
+                                text: `${ing.quantity}${ing.measurement} ${ing.ingredient}`,
+                              }))}
+                              listType="bullet"
+                              style="margin-top: var(--spacing-sm);"
+                            />
+                          )}
+                          {step.extraNote && <p>{step.extraNote}</p>}
+                        </Card>
+                        ) : null }
+                      </Fragment>
+                </Split>
+              </ListItem>
+            ))
+        }
+      </ol>
+      <Card
+        style="highlight"
+        backgroundColor="base"
+        paddingHorizontal="md"
+        paddingVertical="md"
+        useDefaultEditableBinding={false}
+      >
+        <SimpleText size="md" useDefaultEditableBinding={false}>
+          {post.data.extraNote}
+        </SimpleText>
+      </Card>
+    </div>
+  </CustomSection>
+</Page>
 
 <style is:global>
   .time {
