@@ -55,21 +55,6 @@ interface Props {
 }
 
 const { post } = Astro.props;
-
-const ingredients = post.data.method?.flatMap((step) =>
-  step.ingredients.map((ing: any) => ({
-    text: `${ing.quantity}${ing.measurement} ${ing.ingredient}`,
-  }))
-);
-
-const totalTime = (post?.data.prepTime || 0) + (post?.data.cookTime || 0);
-const hours = Math.floor(totalTime / 60);
-const minutes = totalTime % 60;
-
-const parsedTime =
-  totalTime > 0
-    ? `${hours ? `${hours}h ` : ""}${minutes ? `${minutes}m` : ""}`.trim()
-    : "N/A";
 ---
 
 <Page
