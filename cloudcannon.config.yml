@@ -54,7 +54,7 @@ collections_config:
       image.alt:
         comment: A description of the image for accessibility and SEO.
       method:
-        type: select
+        type: array
         options:
           structures:
             - label: Method Step
