@@ -77,63 +77,7 @@ const parsedTime =
   description={post.data.description}
   image={post.data.image?.source}
 >
-  <CustomSection
-    maxContentWidth="xl"
-    paddingHorizontal="lg"
-    paddingVertical="4xl"
-    colorScheme="inherit"
-    backgroundColor="base"
-    class="post-container"
-    useDefaultEditableBinding={false}
-  >
-    <Split
-      distributionMode="half"
-      minSplitWidth="700"
-      gap="xl"
-      class="ingredients"
-      useDefaultEditableBinding={false}
-    >
-      <Fragment slot="first">
-        <Heading
-          data-prop="title"
-          level="h1"
-          size="2xl"
-          style="margin-bottom: var(--spacing-xs);"
-        >
-          {post.data.title}
-        </Heading>
 
-        {
-          post.data.description && (
-            <SimpleText
-              useDefaultEditableBinding={false}
-              size="lg"
-              style="color: var(--color-text-muted); margin-bottom: 0; margin-top: var(--spacing-xs);"
-            >
-              {post.data.description}
-            </SimpleText>
-          )
-        }
-      </Fragment>
-
-      <Fragment slot="second">
-        {
-          post.data.image && (
-            <Image
-              useDefaultEditableBinding={false}
-              source={post.data.image.source}
-              alt={post.data.title}
-              rounded={true}
-              class="post-image"
-              aspectRatio="square"
-              positionVertical="center"
-            />
-          )
-        }
-      </Fragment>
-    </Split>
-
-  </CustomSection>
 </Page>
 
 <style is:global>
