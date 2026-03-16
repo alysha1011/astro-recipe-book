@@ -199,7 +199,7 @@ const parsedTime =
                     useDefaultEditableBinding={false}
                   >
                     <Fragment slot="first">
-                      <SimpleText size="md" data-prop={`step.${index}.instruction`}>{step.instruction}</SimpleText>
+                      <SimpleText size="md" data-prop={`method.${index}.instruction`}>{step.instruction}</SimpleText>
                     </Fragment>
                     <Fragment slot="second">
                       { (Array.isArray(step.ingredients) && step.ingredients.length > 0) || step.extraNote ? (
@@ -221,13 +221,13 @@ const parsedTime =
                             <ul>
                               {step.ingredients.map((ing: any, ingIndex: number) => (
                                 <li key={ingIndex}>
-                                  <span data-editable="text" data-prop={`step.${index}.ingredients.${ingIndex}.quantity`}>
+                                  <span data-editable="text" data-prop={`method.${index}.ingredients.${ingIndex}.quantity`}>
                                     {ing.quantity}
                                   </span>
-                                  <span data-editable="text" data-prop={`step.${index}.ingredients.${ingIndex}.measurement`}>
+                                  <span data-editable="text" data-prop={`method.${index}.ingredients.${ingIndex}.measurement`}>
                                     {ing.measurement}
                                   </span>
-                                  <span data-editable="text" data-prop={`step.${index}.ingredients.${ingIndex}.ingredient`}>
+                                  <span data-editable="text" data-prop={`method.${index}.ingredients.${ingIndex}.ingredient`}>
                                     {ing.ingredient}
                                   </span>
                                 </li>
