@@ -114,50 +114,6 @@ const parsedTime =
             </SimpleText>
           )
         }
-
-        {
-          totalTime > 0 && (
-            <div class="time">
-              <Icon
-                name="clock"
-                size="sm"
-                aria-hidden="true"
-                role="presentation"
-                useDefaultEditableBinding={false}
-              />
-              <Text style="margin-top: 0;" useDefaultEditableBinding={false}>{parsedTime}</Text>
-            </div>
-          )
-        }
-
-        <Card
-          style="sticky"
-          backgroundColor="highlight"
-          paddingHorizontal="md"
-          paddingVertical="md"
-          useDefaultEditableBinding={false}
-        >
-          <Fragment>
-            <Heading
-              level="h2"
-              size="sm"
-              useDefaultEditableBinding={false}
-            >
-              Ingredients
-            </Heading>
-            <List
-              useDefaultEditableBinding={false}
-              items={ingredients || []}
-              listType="bullet"
-              style="margin-top: var(--spacing-sm);"
-            />
-          </Fragment>
-        </Card>
-
-        <div class="cooking_mode">
-          <input type="checkbox" id="cooking_mode" name="cooking_mode" />
-          <label for="cooking_mode">Enable Cooking Mode</label>
-        </div>
       </Fragment>
 
       <Fragment slot="second">
