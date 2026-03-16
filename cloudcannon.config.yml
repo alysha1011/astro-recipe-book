@@ -43,7 +43,55 @@ collections_config:
         remove_extra_inputs: false
     create:
       path: "[relative_base_path]/{filename|slugify|lowercase}.md"
-    new_preview_url: /recipes/biscoff-gelato/
+    new_preview_url: /recipes/biscoff-gelato/\
+    _inputs:
+      title:
+        comment: Name of the recipe, used on cards, in the hero, and as the metadata title.
+      description:
+        comment: A brief description of the recipe, used on cards, in the hero, and as the metadata description.
+      image.src:
+        type: image
+      image.alt:
+        comment: A description of the image for accessibility and SEO.
+      method:
+        type: select
+        options:
+          structures:
+            - label: Method Step
+              icon: checklist
+              value:
+                instruction: ""
+                ingredients: []
+                extraNote: ""
+              _inputs:
+                instruction:
+                  type: textarea
+                ingredients:
+                  type: array
+                  options:
+                    structures:
+                      - label: Ingredient
+                        icon: cube
+                        value:
+                          quantity: ""
+                          measurement: ""
+                          ingredient: ""
+      extraNote:
+        comment: An optional note that appears at the end of the recipe instructions.
+      meal:
+        type: select
+        options:
+          - Breakfast
+          - Lunch
+          - Dinner
+          - Snack
+          - Dessert
+      cookTime:
+        type: number
+        comment: The time it takes to cook the recipe in minutes.
+      prepTime:
+        type: number
+        comment: The time it takes to prepare the recipe in minutes.
   blog:
     path: src/content/blog
     glob:
