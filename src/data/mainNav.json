@@ -1,20 +1,10 @@
 {
-  "logoSource": "/images/logo.svg",
+  "logoSource": "/src/assets/images/book.png",
   "logoAlt": "Logo",
   "navData": [
     {
-      "name": "Home",
+      "name": "Recipes",
       "path": "/",
-      "children": []
-    },
-    {
-      "name": "Why",
-      "path": "/why/",
-      "children": []
-    },
-    {
-      "name": "Blog",
-      "path": "/blog/",
       "children": []
     }
   ],
