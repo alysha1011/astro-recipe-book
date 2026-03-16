@@ -29,6 +29,7 @@ const effectiveChildrenProp = childrenDataProp ?? (useDefaultEditableBinding ? "
 const arrayDataAttributes = effectiveChildrenProp
   ? { "data-editable": "array", "data-prop": effectiveChildrenProp }
   : {};
+const childArrayDataAttributes = effectiveChildrenProp ? { "data-editable": "array-item" } : {};
 
 if (!_component && !hasItems && !usesItemsArray) return;
 ---
@@ -52,7 +53,7 @@ if (!_component && !hasItems && !usesItemsArray) return;
         items?.map((item: ItemProps) => (
           <ListItem
             data-id="building-blocks/core-elements/list/list-item"
-            data-editable={`${arrayDataAttributes} ? "array-item" : ""`}
+            {...childArrayDataAttributes}
             useDefaultEditableBinding={!!effectiveChildrenProp}
             showIcon={showIcons}
             {...item}
