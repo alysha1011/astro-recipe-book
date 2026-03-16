@@ -52,7 +52,7 @@ if (!_component && !hasItems && !usesItemsArray) return;
         items?.map((item: ItemProps) => (
           <ListItem
             data-id="building-blocks/core-elements/list/list-item"
-            data-editable="array-item"
+            data-editable={`${arrayDataAttributes} ? "array-item" : ""`}
             useDefaultEditableBinding={!!effectiveChildrenProp}
             showIcon={showIcons}
             {...item}
