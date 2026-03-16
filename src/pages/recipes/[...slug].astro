@@ -11,59 +11,11 @@ import CustomSection from "@page-sections/builders/custom-section/CustomSection.
 import Icon from "@components/building-blocks/core-elements/icon/Icon.astro";
 import Text from "@components/building-blocks/core-elements/text/Text.astro";
 import { getCollection, render, type CollectionEntry } from "astro:content";
-
-// Automatically import all components from building-blocks and page-sections for MDX
-const buildingBlocksImports = import.meta.glob("../../components/building-blocks/**/*.astro", {
-  eager: true,
-});
-
-const pageSectionsImports = import.meta.glob("../../components/page-sections/**/*.astro", {
-  eager: true,
-});
-
-// Merge both import objects
-const componentImports = { ...buildingBlocksImports, ...pageSectionsImports };
-
-// Build components object with PascalCase names from file paths
-const mdxComponents: Record<string, any> = {};
-
-Object.entries(componentImports).forEach(([path, module]) => {
-  const pathParts = path.split("/");
-  const fileName = pathParts[pathParts.length - 1].replace(".astro", "");
-
-  // Component name is already PascalCase from filename
-  const componentName = fileName;
-
-  mdxComponents[componentName] = (module as any).default;
-});
-
-export async function getStaticPaths() {
-  const posts = await getCollection("recipes");
-
-  return posts.map((post: CollectionEntry<"recipes">) => {
-    const slug = post.id?.replace(/\.md?$/, "") || post.slug;
-
-    return {
-      params: { slug },
-      props: { post },
-    };
-  });
-}
-
-interface Props {
-  post: CollectionEntry<"recipes">;
-}
-
-const { post } = Astro.props;
 ---
 
-<Page
-  title={post.data.title}
-  description={post.data.description}
-  image={post.data.image?.source}
->
-
-</Page>
+<div>
+  
+</div>
 
 <style is:global>
   .time {
