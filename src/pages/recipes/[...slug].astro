@@ -11,6 +11,19 @@ import CustomSection from "@page-sections/builders/custom-section/CustomSection.
 import Icon from "@components/building-blocks/core-elements/icon/Icon.astro";
 import Text from "@components/building-blocks/core-elements/text/Text.astro";
 import { getCollection, render, type CollectionEntry } from "astro:content";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("recipes");
+
+  return posts.map((post: CollectionEntry<"recipes">) => {
+    const slug = post.id?.replace(/\.md?$/, "") || post.slug;
+
+    return {
+      params: { slug },
+      props: { post },
+    };
+  });
+}
 ---
 
 <div>
