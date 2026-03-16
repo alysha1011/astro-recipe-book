@@ -106,7 +106,7 @@ const parsedTime =
         {
           post.data.description && (
             <SimpleText
-              useDefaultEditableBinding={false}
+              data-prop="description"
               size="lg"
               style="color: var(--color-text-muted); margin-bottom: 0; margin-top: var(--spacing-xs);"
             >
@@ -164,7 +164,8 @@ const parsedTime =
         {
           post.data.image && (
             <Image
-              useDefaultEditableBinding={false}
+              data-prop-src="image.source"
+              data-prop-alt="image.alt"
               source={post.data.image.source}
               alt={post.data.title}
               rounded={true}
@@ -198,7 +199,7 @@ const parsedTime =
                     useDefaultEditableBinding={false}
                   >
                     <Fragment slot="first">
-                      <p>{step.instruction}</p>
+                      <SimpleText size="md" data-prop={`step.${index}.instruction`}>{step.instruction}</SimpleText>
                     </Fragment>
                     <Fragment slot="second">
                       { (Array.isArray(step.ingredients) && step.ingredients.length > 0) || step.extraNote ? (
@@ -217,14 +218,21 @@ const parsedTime =
                             >
                               Ingredients
                             </Heading>
-                            <List
-                              useDefaultEditableBinding={false}
-                              items={step.ingredients.map((ing) => ({
-                                text: `${ing.quantity}${ing.measurement} ${ing.ingredient}`,
-                              }))}
-                              listType="bullet"
-                              style="margin-top: var(--spacing-sm);"
-                            />
+                            <ul>
+                              {step.ingredients.map((ing: any, ingIndex: number) => (
+                                <li key={ingIndex}>
+                                  <span data-editable="text" data-prop={`step.${index}.ingredients.${ingIndex}.quantity`}>
+                                    {ing.quantity}
+                                  </span>
+                                  <span data-editable="text" data-prop={`step.${index}.ingredients.${ingIndex}.measurement`}>
+                                    {ing.measurement}
+                                  </span>
+                                  <span data-editable="text" data-prop={`step.${index}.ingredients.${ingIndex}.ingredient`}>
+                                    {ing.ingredient}
+                                  </span>
+                                </li>
+                              ))}
+                            </ul>
                           )}
                           {step.extraNote && <p>{step.extraNote}</p>}
                         </Card>
