@@ -2,56 +2,61 @@ collections_config:
   pages:
     path: src/content/pages
     glob:
-      - "**/*.md"
-    url: /[full_slug]/
+      - '**/*.md'
     icon: web
+    url: /[full_slug]/
+    disable_url: false
     _enabled_editors:
       - visual
-    add_options:
-      - name: Add New Page
-        schema: default
-        icon: pages
-    schemas:
-      default:
-        name: New Page
-        path: .cloudcannon/schemas/page.md
-        remove_extra_inputs: false
-    create:
-      path: "[relative_base_path]/{filename|slugify|lowercase}.md"
-    new_preview_url: /
     _inputs:
       title:
         type: text
         comment: Controls the metadata title for the page.
+        cascade: true
+    add_options:
+      - name: Add New Page
+        icon: pages
+        schema: default
+    create:
+      path: '[relative_base_path]/{filename|slugify|lowercase}.md'
+    disable_add: false
+    disable_add_folder: false
+    disable_file_actions: false
+    new_preview_url: /
+    schemas:
+      default:
+        path: .cloudcannon/schemas/page.md
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: New Page
   recipes:
     path: src/content/recipes
     glob:
-      - "**/*.md"
-    url: /recipes/[full_slug]/
+      - '**/*.md'
     icon: restaurant
+    url: /recipes/[full_slug]/
+    disable_url: false
     _enabled_editors:
       - visual
-    add_options:
-      - name: Add New Recipe
-        schema: default
-        icon: restaurant
-    schemas:
-      default:
-        name: New Recipe
-        path: .cloudcannon/schemas/recipe.md
-        remove_extra_inputs: false
-    create:
-      path: "[relative_base_path]/{filename|slugify|lowercase}.md"
-    new_preview_url: /recipes/biscoff-gelato/
     _inputs:
       title:
-        comment: Name of the recipe, used on cards, in the hero, and as the metadata title.
+        comment: >-
+          Name of the recipe, used on cards, in the hero, and as the metadata
+          title.
+        cascade: true
       description:
-        comment: A brief description of the recipe, used on cards, in the hero, and as the metadata description.
+        comment: >-
+          A brief description of the recipe, used on cards, in the hero, and as
+          the metadata description.
+        cascade: true
       image.src:
         type: image
+        cascade: true
       image.alt:
         comment: A description of the image for accessibility and SEO.
+        cascade: true
       method:
         type: array
         options:
@@ -59,12 +64,13 @@ collections_config:
             - label: Method Step
               icon: checklist
               value:
-                instruction: ""
+                instruction: ''
                 ingredients: []
-                extraNote: ""
+                extraNote: ''
               _inputs:
                 instruction:
                   type: textarea
+                  cascade: true
                 ingredients:
                   type: array
                   options:
@@ -72,87 +78,127 @@ collections_config:
                       - label: Ingredient
                         icon: cube
                         value:
-                          quantity: ""
-                          measurement: ""
-                          ingredient: ""
+                          quantity: ''
+                          measurement: ''
+                          ingredient: ''
+                  cascade: true
+        cascade: true
       extraNote:
         comment: An optional note that appears at the end of the recipe instructions.
+        cascade: true
       tags:
         type: multiselect
-        comment: Tags relevant to this recipe's content, used for filtering and SEO.
         options:
-          allow_add: true
+          allow_create: true
+          allow_empty: true
           values:
             - Vegetarian
             - Quick & Easy
             - Healthy
+        comment: Tags relevant to this recipe's content, used for filtering and SEO.
+        cascade: true
       meal:
         type: multiselect
         options:
+          allow_empty: true
           values:
             - Breakfast
             - Lunch
             - Dinner
             - Snack
             - Dessert
+        cascade: true
       cookTime:
         type: number
         comment: The time it takes to cook the recipe in minutes.
+        cascade: true
       prepTime:
         type: number
         comment: The time it takes to prepare the recipe in minutes.
+        cascade: true
+    add_options:
+      - name: Add New Recipe
+        icon: restaurant
+        schema: default
+    create:
+      path: '[relative_base_path]/{filename|slugify|lowercase}.md'
+    disable_add: false
+    disable_add_folder: false
+    disable_file_actions: false
+    new_preview_url: /recipes/biscoff-gelato/
+    schemas:
+      default:
+        path: .cloudcannon/schemas/recipe.md
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: New Recipe
   blog:
     path: src/content/blog
     glob:
-      - "**/*.mdx"
+      - '**/*.mdx'
+    icon: article
     url: /blog/[full_slug]/
     disable_url: false
-    icon: article
     _enabled_editors:
       - content
       - visual
-    add_options:
-      - name: Add New Blog Post
-        schema: default
-        icon: article
-    schemas:
-      default:
-        name: New Blog Post
-        path: .cloudcannon/schemas/blog-post.mdx
-        remove_extra_inputs: false
-    create:
-      path: "[relative_base_path]/{filename|slugify|lowercase}.mdx"
-    new_preview_url: /blog/
     _inputs:
       title:
         type: text
         comment: The title of the blog post.
+        cascade: true
       description:
         type: text
         comment: A brief description of the blog post.
+        cascade: true
       date:
         type: date
         comment: The publication date.
+        cascade: true
       author:
         type: text
         comment: The author of the blog post.
+        cascade: true
       image:
         type: image
-        comment: Optional image path for the blog post.
         options:
           paths:
             uploads: src/assets/images
           resize_style: contain
           width: 1920
           height: 1280
+        comment: Optional image path for the blog post.
+        cascade: true
       tags:
         type: array
         comment: Tags relevant to this post's content.
+        cascade: true
+    add_options:
+      - name: Add New Blog Post
+        icon: article
+        schema: default
+    create:
+      path: '[relative_base_path]/{filename|slugify|lowercase}.mdx'
+    disable_add: false
+    disable_add_folder: false
+    disable_file_actions: false
+    new_preview_url: /blog/
+    schemas:
+      default:
+        path: .cloudcannon/schemas/blog-post.mdx
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: false
+        name: New Blog Post
   data:
     path: src/data
     glob:
-      - "**/*.json"
+      - '**/*.json'
     icon: database
+    disable_url: false
     _enabled_editors:
       - data
     _inputs:
@@ -164,6 +210,7 @@ collections_config:
           resize_style: contain
           width: 1920
           height: 1280
+        cascade: true
       image:
         type: image
         options:
@@ -172,11 +219,17 @@ collections_config:
           resize_style: contain
           width: 1920
           height: 1280
+        cascade: true
+    disable_add: false
+    disable_add_folder: false
+    disable_file_actions: false
 _inputs:
   pageSections:
     comment: The main sections of the page.
+    cascade: true
   logoSource:
     type: image
+    cascade: true
 _select_data:
   icons:
     - id: academic-cap
@@ -865,10 +918,10 @@ _select_data:
       name: X Circle
     - id: x-mark
       name: X Mark
-
-_structures_from_glob:
-  - /.cloudcannon/structures/*.cloudcannon.structures.yml
 _snippets_imports:
   mdx: true
+timezone: Etc/UTC
+_structures_from_glob:
+  - /.cloudcannon/structures/*.cloudcannon.structures.yml
 _snippets_from_glob:
   - /**/*.cloudcannon.snippets.yml
