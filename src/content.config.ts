@@ -110,6 +110,7 @@ const recipeSchema = z.object({
   meal: z.enum(["Breakfast", "Lunch", "Dinner", "Snack", "Dessert"]).optional(),
   cookTime: z.number().optional(),
   prepTime: z.number().optional(),
+  serves: z.number().optional(),
 });
 
 const recipeCollection = defineCollection({

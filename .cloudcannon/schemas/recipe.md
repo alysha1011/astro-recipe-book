@@ -16,4 +16,5 @@ tags: []
 meal:
 cookTime:
 prepTime:
+serves:
 ---

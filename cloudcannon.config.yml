@@ -77,14 +77,24 @@ collections_config:
                           ingredient: ""
       extraNote:
         comment: An optional note that appears at the end of the recipe instructions.
-      meal:
-        type: select
+      tags:
+        type: multiselect
+        comment: Tags relevant to this recipe's content, used for filtering and SEO.
         options:
-          - Breakfast
-          - Lunch
-          - Dinner
-          - Snack
-          - Dessert
+          allow_add: true
+          values:
+            - Vegetarian
+            - Quick & Easy
+            - Healthy
+      meal:
+        type: multiselect
+        options:
+          values:
+            - Breakfast
+            - Lunch
+            - Dinner
+            - Snack
+            - Dessert
       cookTime:
         type: number
         comment: The time it takes to cook the recipe in minutes.
