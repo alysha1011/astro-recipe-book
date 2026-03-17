@@ -64,7 +64,8 @@ method:
         ingredient: Butter
     extraNote: ''
 extraNote: Add water if needed to loosen the consistency of the risotto.
-tags: []
+tags:
+  - Quick & Easy
 meal:
 cookTime: 20
 prepTime: 20
