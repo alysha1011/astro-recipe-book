@@ -197,12 +197,14 @@ const parsedTime =
       <ol
         data-editable="array"
         data-prop="method"
+        data-component-key="building-blocks/core-elements/list/list-item"
       >
         {
           post.data.method &&
             post.data.method.map((step: any, index: number) => (
               <ListItem
                 data-id="building-blocks/core-elements/list/list-item"
+                data-component-key="building-blocks/core-elements/list/list-item"
                 key={index}
                 data-prop={`method.${index}`}
               >
