@@ -30,7 +30,6 @@ collections_config:
     url: /recipes/[full_slug]/
     icon: restaurant
     _enabled_editors:
-      - content
       - visual
     add_options:
       - name: Add New Recipe
