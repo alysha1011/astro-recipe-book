@@ -9,13 +9,13 @@
     }
 
     body {
-      background-color: var(--color-bg);
-      min-height: 100vh;
       background:
         linear-gradient(90deg, white 15px, transparent 1%) center,
         linear-gradient(white 15px, transparent 1%) center,
         rgba(62, 60, 60, 0.5);
+      background-color: var(--color-bg);
       background-size: 16px 16px;
+      min-height: 100vh;
     }
 
     body,

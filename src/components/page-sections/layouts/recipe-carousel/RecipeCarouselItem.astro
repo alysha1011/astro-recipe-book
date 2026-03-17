@@ -41,7 +41,10 @@ const parsedTime =
   paddingVertical="md"
   imageLink={`/recipes/${slug}/`}
 >
-  <a href={`/recipes/${slug}/`} class="heading-link"> 
+  <a
+    href={`/recipes/${slug}/`}
+    class="heading-link"
+  >
     <Heading
       style="margin-bottom: var(--spacing-sm);"
       level="h2"
@@ -84,7 +87,7 @@ const parsedTime =
     .heading-link {
       text-decoration: none;
     }
-    
+
     .time {
       display: flex;
       align-items: center;

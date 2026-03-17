@@ -1,6 +1,8 @@
 ---
+import Icon from "@components/building-blocks/core-elements/icon/Icon.astro";
 import List from "@components/building-blocks/core-elements/list/List.astro";
 import ListItem from "@components/building-blocks/core-elements/list/ListItem.astro";
+import Text from "@components/building-blocks/core-elements/text/Text.astro";
 import Card from "@components/building-blocks/wrappers/card/Card.astro";
 import Split from "@components/building-blocks/wrappers/split/Split.astro";
 import Heading from "@core-elements/heading/Heading.astro";
@@ -8,9 +10,7 @@ import Image from "@core-elements/image/Image.astro";
 import SimpleText from "@core-elements/simple-text/SimpleText.astro";
 import Page from "@layouts/Page.astro";
 import CustomSection from "@page-sections/builders/custom-section/CustomSection.astro";
-import Icon from "@components/building-blocks/core-elements/icon/Icon.astro";
-import Text from "@components/building-blocks/core-elements/text/Text.astro";
-import { getCollection, render, type CollectionEntry } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
 
 // Automatically import all components from building-blocks and page-sections for MDX
 const buildingBlocksImports = import.meta.glob("../../components/building-blocks/**/*.astro", {
@@ -67,9 +67,7 @@ const hours = Math.floor(totalTime / 60);
 const minutes = totalTime % 60;
 
 const parsedTime =
-  totalTime > 0
-    ? `${hours ? `${hours}h ` : ""}${minutes ? `${minutes}m` : ""}`.trim()
-    : "N/A";
+  totalTime > 0 ? `${hours ? `${hours}h ` : ""}${minutes ? `${minutes}m` : ""}`.trim() : "N/A";
 ---
 
 <Page
@@ -125,7 +123,12 @@ const parsedTime =
                 role="presentation"
                 useDefaultEditableBinding={false}
               />
-              <Text style="margin-top: 0;" useDefaultEditableBinding={false}>{parsedTime}</Text>
+              <Text
+                style="margin-top: 0;"
+                useDefaultEditableBinding={false}
+              >
+                {parsedTime}
+              </Text>
             </div>
           )
         }
@@ -155,7 +158,11 @@ const parsedTime =
         </Card>
 
         <div class="cooking_mode">
-          <input type="checkbox" id="cooking_mode" name="cooking_mode" />
+          <input
+            type="checkbox"
+            id="cooking_mode"
+            name="cooking_mode"
+          />
           <label for="cooking_mode">Enable Cooking Mode</label>
         </div>
       </Fragment>
@@ -187,57 +194,95 @@ const parsedTime =
       >
         Method
       </Heading>
-      <ol data-editable="array" data-prop="method">
+      <ol
+        data-editable="array"
+        data-prop="method"
+      >
         {
           post.data.method &&
             post.data.method.map((step: any, index: number) => (
-              <ListItem key={index} data-prop={`method.${index}`}>
-                  <Split
-                    distributionMode="half"
-                    minSplitWidth="700"
-                    gap="xl"
-                    useDefaultEditableBinding={false}
-                  >
-                    <Fragment slot="first">
-                      <SimpleText size="md" data-prop={`instruction`}>{step.instruction}</SimpleText>
-                    </Fragment>
-                    <Fragment slot="second">
-                      { (Array.isArray(step.ingredients) && step.ingredients.length > 0) || step.extraNote ? (
-                        <Card
-                          style="sticky"
-                          backgroundColor="highlight"
-                          paddingHorizontal="sm"
-                          paddingVertical="sm"
-                          useDefaultEditableBinding={false}
-                        >
+              <ListItem
+                key={index}
+                data-prop={`method.${index}`}
+              >
+                <Split
+                  distributionMode="half"
+                  minSplitWidth="700"
+                  gap="xl"
+                  useDefaultEditableBinding={false}
+                >
+                  <Fragment slot="first">
+                    <SimpleText
+                      size="md"
+                      data-prop={`instruction`}
+                    >
+                      {step.instruction}
+                    </SimpleText>
+                  </Fragment>
+                  <Fragment slot="second">
+                    {(Array.isArray(step.ingredients) && step.ingredients.length > 0) ||
+                    step.extraNote ? (
+                      <Card
+                        style="sticky"
+                        backgroundColor="highlight"
+                        paddingHorizontal="sm"
+                        paddingVertical="sm"
+                        useDefaultEditableBinding={false}
+                      >
+                        <Fragment>
                           {Array.isArray(step.ingredients) && step.ingredients.length > 0 && (
-                            <Heading
-                              level="h3"
-                              size="xs"
-                              useDefaultEditableBinding={false}
-                            >
-                              Ingredients
-                            </Heading>
-                            <ul data-editable="array" data-prop="ingredients">
-                              {step.ingredients.map((ing: any, ingIndex: number) => (
-                                <li key={ingIndex} data-editable="array-item">
-                                  <span data-editable="text" data-prop={`quantity`}>
-                                    {ing.quantity}
-                                  </span>
-                                  <span data-editable="text" data-prop={`measurement`}>
-                                    {ing.measurement}
-                                  </span>
-                                  <span data-editable="text" data-prop={`ingredient`}>
-                                    {ing.ingredient}
-                                  </span>
-                                </li>
-                              ))}
-                            </ul>
+                            <>
+                              <Heading
+                                level="h3"
+                                size="xs"
+                                useDefaultEditableBinding={false}
+                              >
+                                Ingredients
+                              </Heading>
+                              <ul
+                                data-editable="array"
+                                data-prop="ingredients"
+                              >
+                                {step.ingredients.map((ing: any, ingIndex: number) => (
+                                  <li
+                                    key={ingIndex}
+                                    data-editable="array-item"
+                                  >
+                                    <span
+                                      data-editable="text"
+                                      data-prop={`quantity`}
+                                    >
+                                      {ing.quantity}
+                                    </span>
+                                    <span
+                                      data-editable="text"
+                                      data-prop={`measurement`}
+                                    >
+                                      {ing.measurement}
+                                    </span>
+                                    <span
+                                      data-editable="text"
+                                      data-prop={`ingredient`}
+                                    >
+                                      {ing.ingredient}
+                                    </span>
+                                  </li>
+                                ))}
+                              </ul>
+                            </>
                           )}
-                          {step.extraNote && <p data-editable="text" data-prop="extraNote">{step.extraNote}</p>}
-                        </Card>
-                        ) : null }
-                      </Fragment>
+                        </Fragment>
+                        {step.extraNote && (
+                          <p
+                            data-editable="text"
+                            data-prop="extraNote"
+                          >
+                            {step.extraNote}
+                          </p>
+                        )}
+                      </Card>
+                    ) : null}
+                  </Fragment>
                 </Split>
               </ListItem>
             ))
@@ -250,7 +295,10 @@ const parsedTime =
         paddingVertical="md"
         useDefaultEditableBinding={false}
       >
-        <SimpleText size="md" data-prop="extraNote">
+        <SimpleText
+          size="md"
+          data-prop="extraNote"
+        >
           {post.data.extraNote}
         </SimpleText>
       </Card>

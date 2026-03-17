@@ -2,8 +2,8 @@
 title: Biscoff Gelato
 description: Biscoff Gelato made in the ninja creami.
 image:
-  source: "/src/assets/images/biscoff-gelato.png"
-  alt: "Biscoff Gelato"
+  source: '/src/assets/images/biscoff-gelato.png'
+  alt: 'Biscoff Gelato'
 method:
   - instruction: Combine everything together
     ingredients:
@@ -30,7 +30,7 @@ extraNote: If the ice cream is crumbly after the first spin, add 1tsp milk and r
 tags:
   - Ice Cream
   - Ninja Creami
-meal: 
+meal:
   - Dessert
 cookTime: 0
 prepTime: 1445

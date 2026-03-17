@@ -1,6 +1,6 @@
 :where(:root) {
-  --font-body: Courgette;
-  --font-headings: Dancing Script;
+  --font-body: courgette;
+  --font-headings: dancing script;
 
   --font-mono: menlo, consolas, monaco, adwaita mono, liberation mono, lucida console, monospace;
 
