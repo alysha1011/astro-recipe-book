@@ -1,7 +1,7 @@
 ---
 _schema: default
-title: Cheesy Bacon &amp; Leek Pesto Risotto
-description: Cheesy Bacon &amp; Leek Pesto Risotto Recipe
+title: Cheesy Bacon & Leek Pesto Risotto
+description: Cheesy Bacon & Leek Pesto Risotto Recipe
 image:
   source:
   alt:
