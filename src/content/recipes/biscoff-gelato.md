@@ -30,7 +30,8 @@ extraNote: If the ice cream is crumbly after the first spin, add 1tsp milk and r
 tags:
   - Ice Cream
   - Ninja Creami
-meal: Dessert
+meal: 
+  - Dessert
 cookTime: 0
 prepTime: 1445
 ---
