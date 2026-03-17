@@ -107,7 +107,7 @@ const recipeSchema = z.object({
   image: z.object({ source: z.string(), alt: z.string() }).optional(),
   extraNote: z.string().optional(),
   tags: z.array(z.string()).default([]),
-  meal: z.enum(["Breakfast", "Lunch", "Dinner", "Snack", "Dessert"]).optional(),
+  meal: z.array(z.enum(["Breakfast", "Lunch", "Dinner", "Snack", "Dessert"])).optional(),
   cookTime: z.number().optional(),
   prepTime: z.number().optional(),
   serves: z.number().optional(),
