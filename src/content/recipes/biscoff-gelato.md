@@ -2,8 +2,8 @@
 title: Biscoff Gelato
 description: Biscoff Gelato made in the ninja creami.
 image:
-  source: /src/assets/images/biscoff-gelato.png
-  alt: Bidcoff Gelato
+  source: "/src/assets/images/biscoff-gelato.png"
+  alt: "Biscoff Gelato"
 method:
   - instruction: Combine everything together
     ingredients:

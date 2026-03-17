@@ -3,8 +3,8 @@ _schema: default
 title: Cheesy Bacon & Leek Pesto Risotto
 description: Cheesy Bacon & Leek Pesto Risotto Recipe
 image:
-  source:
-  alt:
+  source: ""
+  alt: ""
 method:
   - instruction: Thinly slice leek, dice bacon and finely chop garlic.
     ingredients:
@@ -66,7 +66,12 @@ method:
 extraNote: Add water if needed to loosen the consistency of the risotto.
 tags:
   - Quick & Easy
+  - Rice
+  - Risotto
+  - Bacon
 meal:
+  - Dinner
+  - Lunch
 cookTime: 20
 prepTime: 20
 serves: 2
