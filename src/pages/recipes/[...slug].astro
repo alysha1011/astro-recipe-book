@@ -1,7 +1,6 @@
 ---
 import Icon from "@components/building-blocks/core-elements/icon/Icon.astro";
 import List from "@components/building-blocks/core-elements/list/List.astro";
-import ListItem from "@components/building-blocks/core-elements/list/ListItem.astro";
 import Text from "@components/building-blocks/core-elements/text/Text.astro";
 import Card from "@components/building-blocks/wrappers/card/Card.astro";
 import Split from "@components/building-blocks/wrappers/split/Split.astro";
@@ -202,12 +201,9 @@ const parsedTime =
         {
           post.data.method &&
             post.data.method.map((step: any, index: number) => (
-              <ListItem
+              <li
                 data-editable="array-item"
-                data-id="building-blocks/core-elements/list/list-item"
-                data-component-key="building-blocks/core-elements/list/list-item"
-                key={index}
-                data-prop={`method.${index}`}
+                data-prop={`${index}`}
               >
                 <Split
                   distributionMode="half"
@@ -288,7 +284,7 @@ const parsedTime =
                     ) : null}
                   </Fragment>
                 </Split>
-              </ListItem>
+              </li>
             ))
         }
       </ol>
