@@ -49,5 +49,5 @@ meal:
   - Dinner
 cookTime: 70
 prepTime: 10
-serves: '2'
+serves: 2
 ---
