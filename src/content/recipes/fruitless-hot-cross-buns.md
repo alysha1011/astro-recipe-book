@@ -80,5 +80,5 @@ meal:
   - Snack
 cookTime: 20
 prepTime: 110
-serves: '10'
+serves: 10
 ---
