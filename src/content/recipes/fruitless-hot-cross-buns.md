@@ -72,7 +72,7 @@ method:
       rack to cool.
     ingredients: []
     extraNote:
-extraNote:
+extraNote: ""
 tags:
   - Vegetarian
   - Bread
