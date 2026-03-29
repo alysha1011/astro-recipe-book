@@ -2,7 +2,7 @@ collections_config:
   pages:
     path: src/content/pages
     glob:
-      - "**/*.md"
+      - '**/*.md'
     icon: web
     url: /[full_slug]/
     disable_url: false
@@ -18,7 +18,7 @@ collections_config:
         icon: pages
         schema: default
     create:
-      path: "[relative_base_path]/{filename|slugify|lowercase}.md"
+      path: '[relative_base_path]/{filename|slugify|lowercase}.md'
     disable_add: false
     disable_add_folder: false
     disable_file_actions: false
@@ -34,7 +34,7 @@ collections_config:
   recipes:
     path: src/content/recipes
     glob:
-      - "**/*.md"
+      - '**/*.md'
     icon: restaurant
     url: /recipes/[full_slug]/
     disable_url: false
@@ -64,9 +64,9 @@ collections_config:
             - label: Method Step
               icon: checklist
               value:
-                instruction: ""
+                instruction: ''
                 ingredients: []
-                extraNote: ""
+                extraNote: ''
               _inputs:
                 instruction:
                   type: textarea
@@ -78,12 +78,33 @@ collections_config:
                       - label: Ingredient
                         icon: cube
                         value:
-                          quantity: ""
-                          measurement: ""
-                          ingredient: ""
+                          quantity: ''
+                          measurement: ''
+                          ingredient: ''
                   cascade: true
         cascade: true
       extraNote:
+        type: text
+        options:
+          icon:
+          empty_type: string
+          required:
+          required_message:
+          min_length:
+          min_length_message:
+          max_length:
+          max_length_message:
+          pattern:
+          pattern_message:
+          min_graphemes:
+          min_graphemes_message:
+          max_graphemes:
+          max_graphemes_message:
+          min_words:
+          min_words_message:
+          max_words:
+          max_words_message:
+          locale:
         comment: An optional note that appears at the end of the recipe instructions.
         cascade: true
       tags:
@@ -121,7 +142,7 @@ collections_config:
         icon: restaurant
         schema: default
     create:
-      path: "[relative_base_path]/{filename|slugify|lowercase}.md"
+      path: '[relative_base_path]/{filename|slugify|lowercase}.md'
     disable_add: false
     disable_add_folder: false
     disable_file_actions: false
@@ -137,7 +158,7 @@ collections_config:
   blog:
     path: src/content/blog
     glob:
-      - "**/*.mdx"
+      - '**/*.mdx'
     icon: article
     url: /blog/[full_slug]/
     disable_url: false
@@ -180,7 +201,7 @@ collections_config:
         icon: article
         schema: default
     create:
-      path: "[relative_base_path]/{filename|slugify|lowercase}.mdx"
+      path: '[relative_base_path]/{filename|slugify|lowercase}.mdx'
     disable_add: false
     disable_add_folder: false
     disable_file_actions: false
@@ -196,7 +217,7 @@ collections_config:
   data:
     path: src/data
     glob:
-      - "**/*.json"
+      - '**/*.json'
     icon: database
     disable_url: false
     _enabled_editors:
@@ -229,6 +250,9 @@ _inputs:
     cascade: true
   logoSource:
     type: image
+    cascade: true
+  $.serves:
+    type: number
     cascade: true
 _select_data:
   icons:
